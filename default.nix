@@ -37,6 +37,13 @@ let
     }:
 
     let
+      # development and test gems are needed for running the assets:precompile step...
+      allGems = bundlerEnv {
+        name = "rails-nix-gems";
+        inherit ruby;
+        gemdir = builtins.fetchGit ./.;
+        groups = null;
+      };
       gems = bundlerEnv {
         name = "rails-nix-gems";
         inherit ruby;
@@ -65,7 +72,7 @@ let
         cd $out
 
         # build the assets
-        bundle exec rails assets:precompile
+        ${allGems}/bin/bundle exec rails assets:precompile
         
         # Clean up any cache artifacts from assets precompilation.
         rm -r tmp/cache
