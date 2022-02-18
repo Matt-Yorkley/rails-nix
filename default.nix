@@ -65,7 +65,7 @@ let
         cd $out
 
         # build the assets
-        bundle exec rails assets:precompile
+        BUNDLE_WITHOUT="test:development" bundle exec rails assets:precompile
         
         # Clean up any cache artifacts from assets precompilation.
         rm -r tmp/cache
