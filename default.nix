@@ -33,6 +33,7 @@ let
     , lib
     , ruby
     , bundlerEnv
+    , groups ? ["default"]
     }:
 
     let
@@ -40,6 +41,7 @@ let
         name = "rails-nix-gems";
         inherit ruby;
         gemdir = builtins.fetchGit ./.;
+        inherit groups;
       };
     in
     stdenv.mkDerivation {
@@ -86,6 +88,7 @@ let
       '';
 
       passthru = {
+        inherit gems;
         inherit (gems) wrappedRuby;
       };
     }
