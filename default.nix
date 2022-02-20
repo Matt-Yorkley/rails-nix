@@ -33,6 +33,10 @@ let
     , lib
     , ruby
     , bundlerEnv
+    , yarn2nix
+    , nodejs
+    , yarn
+    , mkYarnModules
     }:
 
     let
@@ -40,6 +44,13 @@ let
         name = "rails-nix-gems";
         inherit ruby;
         gemdir = builtins.fetchGit ./.;
+      };
+      yarnDeps = mkYarnModules {
+        pname = "yarn-deps";
+        version = "0.0.1";
+        packageJSON = ./package.json;
+        yarnLock = ./yarn.lock;
+        yarnNix = ./yarn.nix;
       };
     in
     stdenv.mkDerivation {
@@ -51,9 +62,14 @@ let
       # checked-out revision + any files tracked or staged.
       src = builtins.fetchGit ./.;
 
+      nativeBuildInputs = [ nodejs ];
+
       buildInputs = [
         gems
         gems.wrappedRuby
+        yarn2nix
+        nodejs
+        yarn
       ];
 
       installPhase = ''
@@ -63,8 +79,8 @@ let
         cd $out
 
         # build the assets
-        bundle exec rails assets:precompile
-        
+        WEBPACKER_NODE_MODULES_BIN_PATH=${yarnDeps}/node_modules/.bin bundle exec rails assets:precompile
+
         # Clean up any cache artifacts from assets precompilation.
         rm -r tmp/cache
         )
@@ -83,6 +99,10 @@ let
         ln -vs "${runtimeDirectory}/db/schema.rb" db/schema.rb
         )
         ''}
+      '';
+
+      postBuild = ''
+        ln -sf ${yarnDeps}/node_modules node_modules
       '';
 
       passthru = {
