@@ -530,6 +530,17 @@
     };
     version = "2.2.3";
   };
+  rack-proxy = {
+    dependencies = ["rack"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1dpl6vi9yiv6k8gnr3zrsq7kd1dwbn8vkn70sw7dp975sgb4ziw9";
+      type = "gem";
+    };
+    version = "0.7.2";
+  };
   rack-test = {
     dependencies = ["rack"];
     groups = ["default" "development" "test"];
@@ -665,6 +676,16 @@
     };
     version = "4.1.0";
   };
+  semantic_range = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1dlp97vg95plrsaaqj7x8l7z9vsjbhnqk4rw1l30gy26lmxpfrih";
+      type = "gem";
+    };
+    version = "3.0.0";
+  };
   sprockets = {
     dependencies = ["concurrent-ruby" "rack"];
     groups = ["default"];
@@ -771,6 +792,17 @@
       type = "gem";
     };
     version = "5.0.0";
+  };
+  webpacker = {
+    dependencies = ["activesupport" "rack-proxy" "railties" "semantic_range"];
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "1cq6m5qwm3bmi7hkjfmbg2cs4qjq4wswlrwcfk8l1svfqbi135v3";
+      type = "gem";
+    };
+    version = "5.4.3";
   };
   websocket-driver = {
     dependencies = ["websocket-extensions"];
