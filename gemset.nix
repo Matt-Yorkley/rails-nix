@@ -264,17 +264,6 @@
     };
     version = "1.9.1";
   };
-  importmap-rails = {
-    dependencies = ["actionpack" "railties"];
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "195xyahcqdr9ff8bm1kmql56klvrvv7g4v06zy1rbxz3ns759gig";
-      type = "gem";
-    };
-    version = "1.0.2";
-  };
   io-console = {
     groups = ["default" "development" "test"];
     platforms = [{
@@ -697,16 +686,6 @@
       type = "gem";
     };
     version = "3.4.2";
-  };
-  sqlite3 = {
-    groups = ["default"];
-    platforms = [];
-    source = {
-      remotes = ["https://rubygems.org"];
-      sha256 = "0lja01cp9xd5m6vmx99zwn4r7s97r1w5cb76gqd8xhbm1wxyzf78";
-      type = "gem";
-    };
-    version = "1.4.2";
   };
   stimulus-rails = {
     dependencies = ["railties"];
