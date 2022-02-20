@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "pg", "~> 1.3"
+
+gem "webpacker", "~> 5.4"

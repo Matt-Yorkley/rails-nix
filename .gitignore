@@ -39,3 +39,11 @@ vendor/bundle
 # Nix default result paths
 result
 result-*
+
+# Webpacker
+/public/packs
+/public/packs-test
+/node_modules
+/yarn-error.log
+yarn-debug.log*
+.yarn-integrity
