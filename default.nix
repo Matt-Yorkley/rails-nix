@@ -97,7 +97,38 @@ let
     # ```
     # ruby = pkgs.ruby_2_6;
     # ```
-    #
+
+    ruby = pkgs.ruby.overrideAttrs (oldAttrs: rec {
+      version = {
+        gitTag = "ruby_3_1";
+        major = "3";
+        minor = "1";
+        tiny = "0";
+        tail = "";
+        majMin = "3.1";
+        majMinTiny = "3.1.0";
+        patchLevel = null;
+        libDir = "3.1.0";
+        __toString = self:
+          self.majMinTiny + (
+            if self.patchLevel != null then
+              "-p${self.patchLevel}"
+            else if self.tail != "" then
+              "-${self.tail}"
+            else "");
+      };
+      src = pkgs.fetchurl {
+        url = "https://cache.ruby-lang.org/pub/ruby/${version.majMin}/ruby-${version.majMinTiny}.tar.gz";
+        sha256 = "50a0504c6edcb4d61ce6b8cfdbddaa95707195fab0ecd7b5e92654b2a9412854";
+      };
+      patches = [];
+      configureFlags = ["--enable-shared" "--enable-pthread" "--with-soname=ruby-${version.majMin}"];
+      passthru = rec {
+        rubyEngine = "ruby";
+        libPath = "lib/ruby/${version.majMin}";
+        gemPath = "lib/ruby/gems/${version.majMin}";
+      };
+    });
   };
 
   dockerImage = pkgs.callPackage (
