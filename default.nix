@@ -103,12 +103,12 @@ let
         gitTag = "ruby_3_1";
         major = "3";
         minor = "1";
-        tiny = "0";
+        tiny = "1";
         tail = "";
         majMin = "3.1";
-        majMinTiny = "3.1.0";
+        majMinTiny = "3.1.1";
         patchLevel = null;
-        libDir = "3.1.0";
+        libDir = "3.1.1";
         __toString = self:
           self.majMinTiny + (
             if self.patchLevel != null then
@@ -119,7 +119,7 @@ let
       };
       src = pkgs.fetchurl {
         url = "https://cache.ruby-lang.org/pub/ruby/${version.majMin}/ruby-${version.majMinTiny}.tar.gz";
-        sha256 = "50a0504c6edcb4d61ce6b8cfdbddaa95707195fab0ecd7b5e92654b2a9412854";
+        sha256 = "fe6e4782de97443978ddba8ba4be38d222aa24dc3e3f02a6a8e7701c0eeb619d";
       };
       patches = [];
       configureFlags = ["--enable-shared" "--enable-pthread" "--with-soname=ruby-${version.majMin}"];
